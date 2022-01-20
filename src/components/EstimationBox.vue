@@ -2,7 +2,7 @@
     <div id="estimation-box" :class="toggleNavClass()">
         <h2>Estimació Total</h2>
         <div class="items-total">
-            <ul class="list-group list-group-items">
+            <ul id="list-group-wrap" class="list-group list-group-items">
                 <li class="list-group-item d-flex justify-content-between align-items-start" v-for="(lista, index) in listas" :key="index" :id="index">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold item-title-t">{{lista.nombre}} <small>({{lista.tipo}})</small></div>
@@ -43,14 +43,14 @@ export default {
         }
     },
     mounted(){
-    window.document.onscroll = () => {
-        let navBar = document.getElementById('estimation-box');
-        if(window.scrollY > navBar.offsetTop){
-            this.active = true;
-            } else {
-                this.active = false;
+        window.document.onscroll = () => {
+            let navBar = document.getElementById('estimation-box');
+            if(window.scrollY > navBar.offsetTop){
+                this.active = true;
+                } else {
+                    this.active = false;
+                }
             }
-        }
     }
 }
 </script>
@@ -68,13 +68,19 @@ h2 {
 .list-group-items {
     max-height: 300px;
     overflow: auto;
+    background: #fff;
+    border-radius: 0px;
 }
 .item-title-t {
     color: #2a3c4a !important;
     font-weight: 600 !important;
 }
+.item-title-t small {
+    font-size: 12px;
+    color: #858585;
+}
 .total-est-g {
-    background: #e9e9e9;
+    background: #d6f3f1;
     border: none;
     padding: 8px;
     border-radius: 0px;
@@ -98,5 +104,12 @@ h2 {
     position: fixed;
     max-width: 416px;
     width: 100%;
+    top: 20px;
+}
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    border-color: #d6f3f1;
+    border-radius: 0px;
 }
 </style>

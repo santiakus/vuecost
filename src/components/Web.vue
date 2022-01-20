@@ -1,151 +1,176 @@
 <template>
-    <div class="container pt-5 pb-5">
-        <div class="row">
-            <div class="col-8">
-                <div id="cost-sections">
-                    <div class="section-option">
-                        <h3 class="title-cost">Tipus de Web</h3>
-                        <p class="subtitle-cost">
-                            Selecciona el tipus de web que necessites
-                        </p>
-                        <div class="options-c">
-                            <div class="options-radio-inline">
-                                <div class="row">
-                                    <div class="col-md-4" v-for="(service, index) in services" :key="index" :id="index">
-                                        <div class="form-check form-radio-option">
-                                            <label class="form-check-label" :for="service.id" :class="{ 'active-opt' : service.active }">
-                                                <div class="title-option">
-                                                    <span>{{service.name}}</span>
-                                                    <input class="form-check-input" type="radio" name="web-opt" :id="service.id" v-on:change="toggleActive(service)" v-model="service.active">
-                                                </div>
-                                                <small>{{service.desc}}</small>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-option">
-                        <h3 class="title-cost">Diseny</h3>
-                        <p class="subtitle-cost">
-                            Tens el teu propi disseny o prefereixes començar de 0 amb el nostre equip gràfic?
-                        </p>
-                        <div class="options-c">
-                            <div class="options-radio-inline">
-                                <div class="row">
-                                    <div class="col-md-4" v-for="(diseny, index) in disenys" :key="index" :id="index">
-                                        <div class="form-check form-radio-option">
-                                            <label class="form-check-label" :for="diseny.id" :class="{ 'active-opt' : diseny.active }">
-                                                <div class="title-option">
-                                                    <span>{{diseny.name}}</span>
-                                                    <input class="form-check-input" type="radio" name="diseny-opt" :id="diseny.id" v-on:change="toggleActive(diseny)" v-model="diseny.active">
-                                                </div>
-                                                <small>{{diseny.desc}}</small>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="container-w-2">
-                                <p class="subtitle-cost">Hores Totals</p>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <span class="material-icons">schedule</span>
-                                    </span>
-                                    <input type="text" class="form-control" placeholder="00:00" aria-label="Username" aria-describedby="basic-addon1">
-                                </div>
-                            </div>
-                            <br>
-                            <button class="btn btn-primary btn-sm btn-toggle-icon" v-on:click="isHidden = !isHidden">
-                                <span class="material-icons">edit</span> Afegir Comentari
-                            </button>
-                            <div class="mb-3 txt-diseny" v-if="isHidden">
-                                <br>
-                                <!--<label for="option-diseny-txt" class="form-label">Comentaris</label>-->
-                                <textarea class="form-control" id="option-web-txt" rows="3" placeholder="Escriu el teu comentari..."></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-option">
-                        <h3 class="title-cost">Idioma</h3>
-                        <p class="subtitle-cost">
-                            Quants idiomes vols?
-                        </p>
-                        <div class="options-c">
-                            <div class="options-radio-inline">
-                                <div class="row">
-                                    <div class="col" v-for="(idioma, index) in idiomes" :key="index" :id="index">
-                                        <div class="form-check form-radio-option">
-                                            <label class="form-check-label" :for="idioma.id" :class="{ 'active-opt' : idioma.active }">
-                                                <div class="title-option title-option-single">
-                                                    <span>{{idioma.name}}</span>
-                                                    <input class="form-check-input" type="checkbox" :id="idioma.id" v-on:click="toggleActive(idioma)" v-model="idioma.active">
-                                                </div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <button class="btn btn-primary btn-sm btn-toggle-icon" v-on:click="isHidden2 = !isHidden2">
-                                <span class="material-icons">edit</span> Afegir Comentari
-                            </button>
-                            <div class="mb-3 txt-diseny" v-if="isHidden2">
-                                <br>
-                                <!--<label for="option-diseny-txt" class="form-label">Comentaris</label>-->
-                                <textarea class="form-control" id="option-web-txt" rows="3" placeholder="Escriu el teu comentari..."></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-option">
-                        <h3 class="title-cost">Pàgines</h3>
-                        <p class="subtitle-cost">
-                            Selecciona el nombre de pàgines
-                        </p>
-                        <div class="options-c">
-                            <div class="options-radio-inline">
-                                <div class="range-c">
+    <div id="web">
+        <ProgressBar/>
+        <div class="container pt-5 pb-5">
+            <div class="row">
+                <div class="col-8 container-box-c">
+                    <div id="cost-sections">
+                        <div class="section-option">
+                            <h3 class="title-cost">Tipus de Web</h3>
+                            <p class="subtitle-cost">
+                                Selecciona el tipus de web que necessites
+                            </p>
+                            <div class="options-c">
+                                <div class="options-radio-inline">
                                     <div class="row">
-                                        <div class="col-10">
-                                            <input type="range" class="form-range" id="range-c-input" min="1" max="100" step="1" value="1" v-model="rangeValor" v-on:change="newPages">
-                                        </div>
-                                        <div class="col-2">
-                                            <span>
-                                                <b>{{rangeValor}} Pàgines</b>
-                                            </span>
+                                        <div class="col-md-4" v-for="(service, index) in services" :key="index" :id="index">
+                                            <div class="form-check form-radio-option">
+                                                <label class="form-check-label" :for="service.id" :class="{ 'active-opt' : service.active }">
+                                                    <div class="title-option">
+                                                        <span>{{service.name}}</span>
+                                                        <input class="form-check-input" type="radio" name="web-opt" :id="service.id" v-on:change="toggleActive(service)" v-model="service.active">
+                                                    </div>
+                                                    <small>{{service.desc}}</small>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <br>
-                            <button class="btn btn-primary btn-sm btn-toggle-icon" v-on:click="isHidden3 = !isHidden3">
-                                <span class="material-icons">edit</span> Afegir Comentari
-                            </button>
-                            <div class="mb-3 txt-diseny" v-if="isHidden3">
+                        </div>
+                        <div class="section-option">
+                            <h3 class="title-cost">Diseny</h3>
+                            <p class="subtitle-cost">
+                                Tens el teu propi disseny o prefereixes començar de 0 amb el nostre equip gràfic?
+                            </p>
+                            <div class="options-c">
+                                <div class="options-radio-inline">
+                                    <div class="row">
+                                        <div class="col-md-4" v-for="(diseny, index) in disenys" :key="index" :id="index">
+                                            <div class="form-check form-radio-option">
+                                                <label class="form-check-label" :for="diseny.id" :class="{ 'active-opt' : diseny.active }">
+                                                    <div class="title-option">
+                                                        <span>{{diseny.name}}</span>
+                                                        <input class="form-check-input" type="radio" name="diseny-opt" :id="diseny.id" v-on:change="toggleActive(diseny)" v-model="diseny.active">
+                                                    </div>
+                                                    <small>{{diseny.desc}}</small>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <br>
-                                <!--<label for="option-diseny-txt" class="form-label">Comentaris</label>-->
-                                <textarea class="form-control" id="option-web-txt" rows="3" placeholder="Escriu el teu comentari..."></textarea>
+                                <div class="container-w-2">
+                                    <p class="subtitle-cost">Hores Totals</p>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <span class="material-icons">schedule</span>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="00:00" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <br>
+                                <button class="btn btn-primary btn-sm btn-toggle-icon" v-on:click="isHidden = !isHidden">
+                                    <span class="material-icons">edit</span> Afegir Comentari
+                                </button>
+                                <div class="mb-3 txt-diseny" v-if="isHidden">
+                                    <br>
+                                    <!--<label for="option-diseny-txt" class="form-label">Comentaris</label>-->
+                                    <textarea class="form-control" id="option-web-txt" rows="3" placeholder="Escriu el teu comentari..."></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="section-option">
-                        <h3 class="title-cost">Extres</h3>
-                        <p class="subtitle-cost">
-                            Tria els extres que vols afegir a la teva web i que gestionaran el nostre equip.
-                        </p>
-                        <div class="options-c">
-                            <div class="options-radio-inline options-radio-inline-long">
-                                <div class="row row-cols-auto">
-                                    <div class="col" v-for="(extra, index) in extres" :key="index" :id="index">
-                                        <div class="form-check form-radio-option">
-                                            <label class="form-check-label" :for="extra.id" :class="{ 'active-opt' : extra.active }">
-                                                <div class="title-option title-option-single">
-                                                    <span>{{extra.name}}</span>
-                                                    <input class="form-check-input" type="checkbox" :id="extra.id" v-on:click="toggleActive(extra)" v-model="extra.active">
-                                                </div>
-                                            </label>
+                        <div class="section-option">
+                            <h3 class="title-cost">Idioma</h3>
+                            <p class="subtitle-cost">
+                                Quants idiomes vols?
+                            </p>
+                            <div class="options-c">
+                                <div class="options-radio-inline">
+                                    <div class="row">
+                                        <div class="col" v-for="(idioma, index) in idiomes" :key="index" :id="index">
+                                            <div class="form-check form-radio-option">
+                                                <label class="form-check-label" :for="idioma.id" :class="{ 'active-opt' : idioma.active }">
+                                                    <div class="title-option title-option-single">
+                                                        <span>{{idioma.name}}</span>
+                                                        <input class="form-check-input" type="checkbox" :id="idioma.id" v-on:click="toggleActive(idioma)" v-model="idioma.active">
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <button class="btn btn-primary btn-sm btn-toggle-icon" v-on:click="isHidden2 = !isHidden2">
+                                    <span class="material-icons">edit</span> Afegir Comentari
+                                </button>
+                                <div class="mb-3 txt-diseny" v-if="isHidden2">
+                                    <br>
+                                    <!--<label for="option-diseny-txt" class="form-label">Comentaris</label>-->
+                                    <textarea class="form-control" id="option-web-txt" rows="3" placeholder="Escriu el teu comentari..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-option">
+                            <h3 class="title-cost">Pàgines</h3>
+                            <p class="subtitle-cost">
+                                Selecciona el nombre de pàgines
+                            </p>
+                            <div class="options-c">
+                                <div class="options-radio-inline">
+                                    <div class="range-c">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <input type="range" class="form-range" id="range-c-input" min="1" max="100" step="1" value="1" v-model="rangeValor" v-on:change="newPages">
+                                            </div>
+                                            <div class="col-2">
+                                                <span>
+                                                    <b>{{rangeValor}} Pàgines</b>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <button class="btn btn-primary btn-sm btn-toggle-icon" v-on:click="isHidden3 = !isHidden3">
+                                    <span class="material-icons">edit</span> Afegir Comentari
+                                </button>
+                                <div class="mb-3 txt-diseny" v-if="isHidden3">
+                                    <br>
+                                    <!--<label for="option-diseny-txt" class="form-label">Comentaris</label>-->
+                                    <textarea class="form-control" id="option-web-txt" rows="3" placeholder="Escriu el teu comentari..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-option">
+                            <h3 class="title-cost">Extres</h3>
+                            <p class="subtitle-cost">
+                                Tria els extres que vols afegir a la teva web i que gestionaran el nostre equip.
+                            </p>
+                            <div class="options-c">
+                                <div class="options-radio-inline options-radio-inline-long">
+                                    <div class="row row-cols-auto">
+                                        <div class="col" v-for="(extra, index) in extres" :key="index" :id="index">
+                                            <div class="form-check form-radio-option">
+                                                <label class="form-check-label" :for="extra.id" :class="{ 'active-opt' : extra.active }">
+                                                    <div class="title-option title-option-single">
+                                                        <span>{{extra.name}}</span>
+                                                        <input class="form-check-input" type="checkbox" :id="extra.id" v-on:click="toggleActive(extra)" v-model="extra.active">
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-option">
+                            <h3 class="title-cost">Domini i Hosting</h3>
+                            <p class="subtitle-cost">
+                                Vols un nou domini i/o hosting?
+                            </p>
+                            <div class="options-c">
+                                <div class="options-radio-inline">
+                                    <div class="row row-cols-5">
+                                        <div class="col" v-for="(domini, index) in dominis" :key="index" :id="index">
+                                            <div class="form-check form-radio-option">
+                                                <label class="form-check-label" :for="domini.id" :class="{ 'active-opt' : domini.active }">
+                                                    <div class="title-option title-option-single">
+                                                        <span>{{domini.name}}</span>
+                                                        <input class="form-check-input" type="checkbox" :id="domini.id" v-on:click="toggleActive(domini)" v-model="domini.active">
+                                                    </div>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -153,20 +178,22 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-4">
-                <span style="display:none">{{total()}}</span>
-                <EstimationBox :coste="total()" :listas="listasArr"/>
+                <div class="col-4">
+                    <span style="display:none">{{total()}}</span>
+                    <EstimationBox :coste="total()" :listas="listasArr"/>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import ProgressBar from '../components/ProgressBar.vue'
 import EstimationBox from '../components/EstimationBox.vue'
 export default {
     name: 'Web',
     components: {
+        ProgressBar,
         EstimationBox
     },
     costeTotal: 0,
@@ -322,6 +349,38 @@ export default {
                     active: false
                 },
             ],
+            dominis: [
+                {
+                    type: 'domini',
+                    name: '.com',
+                    price: 10,
+                    active: false
+                },
+                {
+                    type: 'domini',
+                    name: '.es',
+                    price: 20,
+                    active: false
+                },
+                {
+                    type: 'domini',
+                    name: '.cat',
+                    price: 30,
+                    active: false
+                },
+                {
+                    type: 'domini',
+                    name: 'altres',
+                    price: 30,
+                    active: false
+                },
+                {
+                    type: 'domini',
+                    name: 'hosting',
+                    price: 100,
+                    active: false
+                },
+            ],
         }
     },
     methods: {
@@ -402,6 +461,24 @@ export default {
                 });
                 s.active = true;
             }
+            if(s.type == 'domini'){
+                if(!s.active){
+                    if(!existsMultiple){
+                        this.listasArr.push(arr)
+                    }
+                }else{
+                    index = this.listasArr.map(function (element) {return element.nombre;}).indexOf(s.name);
+                    this.listasArr.splice(index, 1)
+                }
+                this.disenys.forEach(function(e) {
+                    if (e.active) {
+                    e.active = false;
+                    }
+                });
+                s.active = true;
+            }
+            var objDiv = document.getElementById("list-group-wrap");
+            objDiv.scrollTop = objDiv.scrollHeight;
         },
         newPages: function() {
             this.listasArr[0]['tipo'] = this.rangeValor
@@ -434,6 +511,11 @@ export default {
                 }
             });
             this.extres.forEach(function(s) {
+                if (s.active) {
+                    total += s.price;
+                }
+            });
+            this.dominis.forEach(function(s) {
                 if (s.active) {
                     total += s.price;
                 }

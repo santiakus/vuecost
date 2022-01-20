@@ -1,9 +1,9 @@
 <template>
     <div id="header">
-        <nav class="navbar navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                <img src="https://calculador.devgrafix.com/wp-content/uploads/2021/02/logo.png" alt="" width="  100" height="auto">
+        <nav class="navbar navbar-light">
+            <div class="container text-center">
+                <a class="navbar-brand" href="/">
+                <img src="https://calculador.devgrafix.com/wp-content/uploads/2021/02/logo.png" alt="" width="300" height="auto">
                 </a>
             </div>
         </nav>
