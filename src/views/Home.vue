@@ -11,7 +11,7 @@
                         <span class="input-group-text" id="basic-addon1">
                             <span class="material-icons">person</span>
                         </span>
-                        <input type="text" class="form-control" placeholder="Nom del client" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="text" class="form-control" placeholder="Nom del client" aria-label="Username" aria-describedby="basic-addon1" v-model="nomClient" @input="persist()" value="">
                     </div>
                 </div>
                 <div class="section-option container-medium">
@@ -20,7 +20,7 @@
                         Descriu breument quins son els objectius
                     </p>
                     <div class="form-floating">
-                        <textarea class="form-control textarea-c" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                        <textarea class="form-control textarea-c" placeholder="Leave a comment here" id="floatingTextarea" v-model="obtClient" @input="persist()" value=""></textarea>
                         <label for="floatingTextarea">Objectius</label>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                 </div>
                 <br>
                 <div>
-                    <router-link to="web" class="btn btn-primary btn-lg">SEGÜENT</router-link>
+                    <router-link :to="link" class="btn btn-primary btn-lg btn-step" :disabled="!ActiveLink" :event="ActiveLink ? 'click' : ''"><span class="material-icons">navigate_next</span> SEGÜENT</router-link>
                 </div>
             </div>
         </div>
@@ -64,12 +64,17 @@ export default {
     name: 'Home',
     data() {
         return {
+            nomClient: '',
+            obtClient: '',
+            ActiveLink: false,
+            link: '',
             services: [
                 {
                     type: 'tipus',
                     name: 'Web',
                     desc: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
                     icon: 'desktop_windows',
+                    url: 'web',
                     active: false
                 },
                 {
@@ -77,6 +82,7 @@ export default {
                     name: 'Diseny Gràfic',
                     desc: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
                     icon: 'square_foot',
+                    url: 'diseny',
                     active: false
                 },
                 {
@@ -84,6 +90,7 @@ export default {
                     name: 'Màrqueting i Social Media',
                     desc: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
                     icon: 'thumb_up_alt',
+                    url: 'marqueting',
                     active: false
                 },
                 {
@@ -91,9 +98,10 @@ export default {
                     name: 'Audiovisuals',
                     desc: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
                     icon: 'videocam',
+                    url: 'video',
                     active: false
                 },
-            ],
+            ]
         }
     },
     methods: {
@@ -104,7 +112,15 @@ export default {
                 }
             });
             s.active = true;
+            this.link = s.url
         },
+        persist() {
+            localStorage.removeItem('nomClient');
+            localStorage.removeItem('obtClient');
+            localStorage.setItem('nomClient', this.nomClient)
+            localStorage.setItem('obtClient', this.obtClient)
+            this.ActiveLink = true
+        }
     }
 }
 </script>

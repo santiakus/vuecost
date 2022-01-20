@@ -176,6 +176,66 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="section-option">
+                            <h3 class="title-cost">Manteniment</h3>
+                            <p class="subtitle-cost">
+                                Un cop finalitzat el projecte, es recomana contractar el servei de manteniment. Aquest servei garantitzara un seguiment i actualitzacions constants del lloc. El sistema utilitzat son les bosses d’hores. El client podrà utilitzar la bossa d’hores sense caducitat i en qualsevol departament de Grafix.
+                            </p>
+                            <ul class="subtitle-cost list-opts">
+                                <li>
+                                    <span class="material-icons">radio_button_checked</span> Pack de 10h (440€ + iva).
+                                </li>
+                                <li>
+                                    <span class="material-icons">radio_button_checked</span> Pack de 20h. (840€ + iva).
+                                </li>
+                                <li>
+                                    <span class="material-icons">radio_button_checked</span> Pack 40h. (1600€ + iva).
+                                </li>
+                                <li>
+                                    <span class="material-icons">radio_button_checked</span> A la carta. (a valorar)
+                                </li>
+                            </ul>
+                            <div class="options-c">
+                                <div class="options-radio-inline">
+                                    <div class="row row-cols-3">
+                                        <div class="col">
+                                            <div class="form-check form-radio-option">
+                                                <label class="form-check-label">
+                                                    <div class="title-option title-option-single">
+                                                        <span>Si vull Manteniment</span>
+                                                        <input class="form-check-input" type="radio" name="manteniment" value="1" checked>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check form-radio-option">
+                                                <label class="form-check-label">
+                                                    <div class="title-option title-option-single">
+                                                        <span>No vull Manteniment</span>
+                                                        <input class="form-check-input" type="radio" name="manteniment" value="0">
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <button class="btn btn-primary btn-sm btn-toggle-icon" v-on:click="isHidden4 = !isHidden4">
+                                    <span class="material-icons">edit</span> Afegir Comentari
+                                </button>
+                                <div class="mb-3 txt-diseny" v-if="isHidden4">
+                                    <br>
+                                    <!--<label for="option-diseny-txt" class="form-label">Comentaris</label>-->
+                                    <textarea class="form-control" id="option-web-txt" rows="3" placeholder="Escriu el teu comentari..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-option section-option-last">
+                            <div class="options-c text-center">
+                                <router-link to="preu-final" class="btn btn-primary btn-lg btn-step"><span class="material-icons">navigate_next</span> SEGÜENT</router-link>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-4">
@@ -281,6 +341,7 @@ export default {
             isHidden2: false,
             rangeValor: 1,
             isHidden3: false,
+            isHidden4: false,
             extres: [
                 {
                     type: 'extres',
@@ -544,5 +605,31 @@ input[type='range']::-webkit-slider-thumb {
 .options-radio-inline-long .form-radio-option .title-option {
     padding-right: 20px;
     font-size: 13px;
+}
+.list-opts {
+    margin: 0;
+    list-style: none;
+    width: auto;
+    display: inline-grid;
+    background: #d6f3f1;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    padding: 0px;
+    border-radius: 10px;
+    color: initial;
+}
+.list-opts li {
+    border-bottom: 1px solid #68cbc8;
+    padding: 7px 18px 7px 17px;
+    font-size: 14px;
+}
+.list-opts li:last-child {
+    border: none;
+}
+.list-opts li span {
+    font-size: 14px;
+    position: relative;
+    top: 3px;
+    color: #1dbfb9;
 }
 </style>
