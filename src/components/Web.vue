@@ -233,7 +233,7 @@
                         </div>
                         <div class="section-option section-option-last">
                             <div class="options-c text-center">
-                                <router-link to="preu-final" class="btn btn-primary btn-lg btn-step"><span class="material-icons">navigate_next</span> SEGÜENT</router-link>
+                                <button type="button" class="btn btn-primary btn-lg btn-step" @click.prevent="submit()"><span class="material-icons">navigate_next</span> SEGÜENT</button>
                             </div>
                         </div>
                     </div>
@@ -267,6 +267,7 @@ export default {
     },
     data() {
         return {
+            dataTotal: '',
             listasArr: [{
                 'tipo':1,
                 'nombre':'Pàgines',
@@ -584,6 +585,18 @@ export default {
         
             //this.coste = total;
             return total;
+        },
+        submit: function() {
+            var params=new Object();
+			params.listasArr=this.listasArr;
+            localStorage.setItem('dataTotal', JSON.stringify(params.listasArr))
+			//alert("formdata："+JSON.stringify(params));
+            window.location.href = 'preu-final';
+            //this.$http.post('/preu-final', JSON.stringify(params))
+            /*var formData = new FormData();
+            formData.append('listasArr', this.listasArr);
+            this.$http.post('/preu-final', formData)*/
+
         }
     }
 }
